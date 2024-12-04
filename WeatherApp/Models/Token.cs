@@ -12,5 +12,9 @@ namespace WeatherApp.Models
         public string? TokenType { get; set; }
         public int? UsuarioId { get; set; }
         public string? UsuarioNome { get; set; }
+
+        public string? UsuarioEmail { get; set; }
+
+        public string? UsuarioFone { get; set; }
     }
 }

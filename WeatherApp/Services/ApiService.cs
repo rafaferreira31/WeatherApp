@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -29,16 +30,16 @@ namespace WeatherApp.Services
             };
         }
 
-        public async Task<ApiResponse<bool>> RegistrarUsuario(string nome, string email,
-                                                     string telefone, string password)
+        public async Task<ApiResponse<bool>> Register(string name, string email,
+                                                     string phone, string password)
         {
             try
             {
                 var register = new Register()
                 {
-                    Nome = nome,
+                    Nome = name,
                     Email = email,
-                    Telefone = telefone,
+                    Telefone = phone,
                     Senha = password
                 };
 
@@ -97,6 +98,8 @@ namespace WeatherApp.Services
                 Preferences.Set("accesstoken", result!.AccessToken);
                 Preferences.Set("usuarioid", (int)result.UsuarioId!);
                 Preferences.Set("usuarionome", result.UsuarioNome);
+                Preferences.Set("usuarioemail", result.UsuarioEmail);
+                Preferences.Set("usuariofone", result.UsuarioFone);
 
                 return new ApiResponse<bool> { Data = true };
             }
@@ -119,6 +122,96 @@ namespace WeatherApp.Services
             {
                 _logger.LogError($"Error sending POST request for {uri}: {ex.Message}");
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<(ProfileImage? ImagemPerfil, string? ErrorMessage)> GetUserProfileImage()
+        {
+            string endpoint = "api/usuarios/imagemperfil";
+            return await GetAsync<ProfileImage>(endpoint);
+        }
+
+
+        private async Task<(T? Data, string? ErrorMessage)> GetAsync<T>(string endpoint)
+        {
+            try
+            {
+                AddAuthorizationHeader();
+
+                var response = await _httpClient.GetAsync(AppConfig.BaseUrl + endpoint);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<T>(responseString, _serializerOptions);
+                    return (data ?? Activator.CreateInstance<T>(), null);
+                }
+                else
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        string errorMessage = "Unauthorized";
+                        _logger.LogWarning(errorMessage);
+                        return (default, errorMessage);
+                    }
+
+                    string generalErrorMessage = $"Erro na requisição: {response.ReasonPhrase}";
+                    _logger.LogError(generalErrorMessage);
+                    return (default, generalErrorMessage);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                string errorMessage = $"Erro de requisição HTTP: {ex.Message}";
+                _logger.LogError(ex, errorMessage);
+                return (default, errorMessage);
+            }
+            catch (JsonException ex)
+            {
+                string errorMessage = $"Erro de desserialização JSON: {ex.Message}";
+                _logger.LogError(ex, errorMessage);
+                return (default, errorMessage);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = $"Erro inesperado: {ex.Message}";
+                _logger.LogError(ex, errorMessage);
+                return (default, errorMessage);
+            }
+        }
+
+        private void AddAuthorizationHeader()
+        {
+            var token = Preferences.Get("accesstoken", string.Empty);
+            if (!string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+        }
+
+        public async Task<ApiResponse<bool>> UploadUserImage(byte[] imageArray)
+        {
+            try
+            {
+                var content = new MultipartFormDataContent();
+                content.Add(new ByteArrayContent(imageArray), "imagem", "image.jpg");
+                var response = await PostRequest("api/usuarios/uploadfoto", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    string errorMessage = response.StatusCode == HttpStatusCode.Unauthorized
+                      ? "Unauthorized"
+                      : $"Erro ao enviar requisição HTTP: {response.StatusCode}";
+
+                    _logger.LogError($"Erro ao enviar requisição HTTP: {response.StatusCode}");
+                    return new ApiResponse<bool> { ErrorMessage = errorMessage };
+                }
+                return new ApiResponse<bool> { Data = true };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro ao fazer upload da imagem do usuário: {ex.Message}");
+                return new ApiResponse<bool> { ErrorMessage = ex.Message };
             }
         }
     }

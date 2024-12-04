@@ -20,6 +20,7 @@ namespace WeatherApp
         private void ConfigureShell()
         {
             var homePage = new HomePage();
+            var profile = new ProfilePage(_apiService, _validator);
 
 
             Items.Add(new TabBar
@@ -27,6 +28,7 @@ namespace WeatherApp
                 Items =
                 {
                     new ShellContent { Title = "Home", Icon ="home", Content = homePage },
+                    new ShellContent {Title = "Profile", Icon="profile", Content = profile },
                 }
 
             }

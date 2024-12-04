@@ -19,7 +19,7 @@ public partial class RegisterPage : ContentPage
     {
         if (await _validator.Validate(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text))
         {
-            var response = await _apiService.RegistrarUsuario(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
+            var response = await _apiService.Register(EntName.Text, EntEmail.Text, EntPhone.Text, EntPassword.Text);
 
             if (!response.HasError)
             {

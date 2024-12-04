@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Pages.QuestionsPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Questions">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
+            <Label Text="Frequent Questions"
+               FontSize="Medium"
+               TextColor="DarkBlue"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <Label Text="How can I register to use the app?"
+                        FontSize="15"
+                        FontAttributes="Bold" />
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <Label Text="Registration is done directly on our official website. Simply visit WeatherAppRafael.com, create an account, and then use the same credentials to log in to the app."
+               TextColor="DarkBlue"
+               FontSize="12" />
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <Label Text="How often is the weather forecast updated?"
+                        FontSize="15"
+                        FontAttributes="Bold" />
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <Label Text="Weather information is updated in real-time directly from the OpenWeatherMap API, ensuring accurate and reliable data every time you check."
+                        TextColor="DarkBlue"
+                        FontSize="12" />
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+            
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <Label Text="Is it possible to use the app offline?"
+                        FontSize="15"
+                        FontAttributes="Bold" />
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <Label Text="Yes, the app saves data from the last cities you viewed, allowing you to see basic information even without an internet connection."
+                        TextColor="DarkBlue"
+                        FontSize="12" />
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+
+            <toolkit:Expander>
+                <toolkit:Expander.Header>
+                    <Label Text="How can I add or remove favorite cities?"
+                        FontSize="15"
+                        FontAttributes="Bold" />
+                </toolkit:Expander.Header>
+                <toolkit:Expander.Content>
+                    <Label Text="To add a city as a favorite, click on the star icon on the city's detail page. To remove it, simply click the icon again."
+                        TextColor="DarkBlue"
+                        FontSize="12" />
+                </toolkit:Expander.Content>
+            </toolkit:Expander>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
