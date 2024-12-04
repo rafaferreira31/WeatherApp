@@ -4,12 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:WeatherApp"
+    xmlns:pages="clr-namespace:WeatherApp.Pages"
     Shell.FlyoutBehavior="Disabled"
-    Title="WeatherApp">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    Shell.NavBarHasShadow="True"
+    Shell.BackgroundColor="#2196F3"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White"
+    Shell.UnselectedColor="White"
+    Shell.DisabledColor="#BFBFBF"
+    Shell.TabBarTitleColor="AntiqueWhite"
+    Shell.TabBarBackgroundColor="#77A7FF"
+    Shell.TabBarForegroundColor="White">
 </Shell>
