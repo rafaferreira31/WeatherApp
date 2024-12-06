@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.Pages.WeatherDetailsPage"
-             Title="WeatherDetailsPage">
+             Title="{Binding}">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
           RowSpacing="20">
@@ -49,12 +49,12 @@
                VerticalOptions="Start"
                HeightRequest="250"
                WidthRequest="250"
-               Margin="20"/>
+               Margin="7"/>
 
         <Grid Grid.Row="3"
               RowDefinitions="Auto,Auto"
               ColumnDefinitions="0.33*,0.33*, 0.33*"
-              Margin="20">
+              Margin="2">
 
             <Image Grid.Row="0"
                    Grid.Column="0"
@@ -110,7 +110,7 @@
                         <Label Grid.Row="1"
                                FontSize="Large"
                                HorizontalOptions="Center"
-                               Text="{Binding main.temperature}"/>
+                               Text="{Binding main.temperatureDisplay}"/>
 
                         <Label Grid.Row="2"
                                FontSize="Small"

@@ -16,8 +16,7 @@ namespace WeatherApp
             _validator = validator;
 
 
-            MainPage = new WeatherDetailsPage(_apiService);
-            //SetMainPage();
+            SetMainPage();
         }
 
         private void SetMainPage()

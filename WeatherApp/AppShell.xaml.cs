@@ -1,4 +1,5 @@
-﻿using WeatherApp.Pages;
+﻿using WeatherApp.Models;
+using WeatherApp.Pages;
 using WeatherApp.Services;
 using WeatherApp.Validations;
 
@@ -19,7 +20,8 @@ namespace WeatherApp
 
         private void ConfigureShell()
         {
-            var homePage = new HomePage();
+            var homePage = new WeatherDetailsPage(_apiService);
+            var questions = new QuestionsPage();
             var profile = new ProfilePage(_apiService, _validator);
 
 
@@ -28,6 +30,7 @@ namespace WeatherApp
                 Items =
                 {
                     new ShellContent { Title = "Home", Icon ="home", Content = homePage },
+                    new ShellContent { Title = "Questions", Icon ="perguntas", Content = questions },
                     new ShellContent {Title = "Profile", Icon="profile", Content = profile },
                 }
 

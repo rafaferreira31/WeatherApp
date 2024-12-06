@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using WeatherApp.Services;
 
 namespace WeatherApp.Pages;
@@ -5,7 +6,7 @@ namespace WeatherApp.Pages;
 public partial class WeatherDetailsPage : ContentPage
 {
     private readonly ApiService _apiService;
-    public List<Models.List> WeatherList;
+    public ObservableCollection<Models.List> WeatherList;
     private double latitude;
     private double longitude;
 
@@ -13,7 +14,7 @@ public partial class WeatherDetailsPage : ContentPage
 	{
 		InitializeComponent();
         _apiService = apiService;
-        WeatherList = new List<Models.List>();
+        WeatherList = new ObservableCollection<Models.List>();
     }
 
     protected async override void OnAppearing()
@@ -35,6 +36,7 @@ public partial class WeatherDetailsPage : ContentPage
     {
         var result = await _apiService.GetWeather(latitude, longitude);
 
+        WeatherList.Clear();
         foreach (var item in result.list)
         {
             WeatherList.Add(item);
@@ -53,6 +55,7 @@ public partial class WeatherDetailsPage : ContentPage
     {
         var result = await _apiService.GetWeatherByCity(city);
 
+        WeatherList.Clear();
         foreach (var item in result.list)
         {
             WeatherList.Add(item);
