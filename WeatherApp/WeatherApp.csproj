@@ -57,11 +57,35 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\accounts.png" />
+	  <None Remove="Resources\Images\cold.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\humidity.png" />
+	  <None Remove="Resources\Images\icon_01d.png" />
+	  <None Remove="Resources\Images\icon_01n.png" />
+	  <None Remove="Resources\Images\icon_02d.png" />
+	  <None Remove="Resources\Images\icon_02n.png" />
+	  <None Remove="Resources\Images\icon_03d.png" />
+	  <None Remove="Resources\Images\icon_03n.png" />
+	  <None Remove="Resources\Images\icon_04d.png" />
+	  <None Remove="Resources\Images\icon_04n.png" />
+	  <None Remove="Resources\Images\icon_09d.png" />
+	  <None Remove="Resources\Images\icon_09n.png" />
+	  <None Remove="Resources\Images\icon_10d.png" />
+	  <None Remove="Resources\Images\icon_10n.png" />
+	  <None Remove="Resources\Images\icon_11d.png" />
+	  <None Remove="Resources\Images\icon_11n.png" />
+	  <None Remove="Resources\Images\icon_13d.png" />
+	  <None Remove="Resources\Images\icon_13n.png" />
+	  <None Remove="Resources\Images\icon_50d.png" />
+	  <None Remove="Resources\Images\icon_50n.png" />
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\perfilconfig.png" />
 	  <None Remove="Resources\Images\perguntas.png" />
 	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\snowy.png" />
+	  <None Remove="Resources\Images\umbrella.png" />
+	  <None Remove="Resources\Images\wind_vane.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +94,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="UtcTimeLibrary" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -89,6 +115,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WeatherDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

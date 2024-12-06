@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace WeatherApp.Services
                     Senha = password
                 };
 
-                var json = JsonSerializer.Serialize(register, _serializerOptions);
+                var json = System.Text.Json.JsonSerializer.Serialize(register, _serializerOptions);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await PostRequest("api/Usuarios/Register", content);
@@ -78,7 +79,7 @@ namespace WeatherApp.Services
                     Senha = password
                 };
 
-                var json = JsonSerializer.Serialize(login, _serializerOptions);
+                var json = System.Text.Json.JsonSerializer.Serialize(login, _serializerOptions);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await PostRequest("api/Usuarios/Login", content);
@@ -93,7 +94,7 @@ namespace WeatherApp.Services
                 }
 
                 var jsonResult = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<Token>(jsonResult, _serializerOptions);
+                var result = System.Text.Json.JsonSerializer.Deserialize<Token>(jsonResult, _serializerOptions);
 
                 Preferences.Set("accesstoken", result!.AccessToken);
                 Preferences.Set("usuarioid", (int)result.UsuarioId!);
@@ -143,7 +144,7 @@ namespace WeatherApp.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<T>(responseString, _serializerOptions);
+                    var data = System.Text.Json.JsonSerializer.Deserialize<T>(responseString, _serializerOptions);
                     return (data ?? Activator.CreateInstance<T>(), null);
                 }
                 else
@@ -166,7 +167,7 @@ namespace WeatherApp.Services
                 _logger.LogError(ex, errorMessage);
                 return (default, errorMessage);
             }
-            catch (JsonException ex)
+            catch (System.Text.Json.JsonException ex)
             {
                 string errorMessage = $"Erro de desserialização JSON: {ex.Message}";
                 _logger.LogError(ex, errorMessage);
@@ -213,6 +214,23 @@ namespace WeatherApp.Services
                 _logger.LogError($"Erro ao fazer upload da imagem do usuário: {ex.Message}");
                 return new ApiResponse<bool> { ErrorMessage = ex.Message };
             }
+        }
+
+
+        public async Task<Root> GetWeather(double latitude, double longitude)
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(string.Format("https://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&units=metric&appid=2cab3f65efa3c3fae8fe1d0d841a95f1", latitude, longitude));
+
+            return JsonConvert.DeserializeObject<Root>(response);
+        }
+
+        public async Task<Root> GetWeatherByCity(string city)
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetStringAsync(string.Format("https://api.openweathermap.org/data/2.5/forecast?q={0}&units=metric&appid=2cab3f65efa3c3fae8fe1d0d841a95f1", city));
+
+            return JsonConvert.DeserializeObject<Root>(response);
         }
     }
 }
