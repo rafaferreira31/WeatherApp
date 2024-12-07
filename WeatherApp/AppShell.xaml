@@ -7,7 +7,7 @@
     xmlns:pages="clr-namespace:WeatherApp.Pages"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarHasShadow="True"
-    Shell.BackgroundColor="#2196F3"
+    Shell.BackgroundColor="#77A7FF"
     Shell.ForegroundColor="White"
     Shell.TitleColor="White"
     Shell.UnselectedColor="White"

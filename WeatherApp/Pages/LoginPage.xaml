@@ -38,14 +38,14 @@
         Text="Entrar"
         FontSize="Medium"
         x:Name="BtnSignIn" 
-        BackgroundColor="#a90409"
+        BackgroundColor="#77A7FF"
         Clicked="BtnSignIn_Clicked"/>
         <HorizontalStackLayout Grid.Row="4"
                        Spacing="2"
                        HorizontalOptions="Center"
                        VerticalOptions="EndAndExpand">
             <Label Text="Don't have an account? " />
-            <Label Text="Register" TextColor="#a90409" FontAttributes="Bold">
+            <Label Text="Register" TextColor="#77A7FF" FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapRegister"
                                   Tapped="TapRegister_Tapped"/>

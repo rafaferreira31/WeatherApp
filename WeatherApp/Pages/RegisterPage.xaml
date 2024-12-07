@@ -43,7 +43,7 @@
         <Button Grid.Row="3"
         Text="Register"
         FontSize="Medium"
-        BackgroundColor="#a90409"
+        BackgroundColor="#77A7FF"
         x:Name="BtnSignup" 
         Clicked="BtnSignup_Clicked"/>
 
@@ -51,7 +51,7 @@
                        Spacing="2" HorizontalOptions="Center"                      
                        VerticalOptions="EndAndExpand">
             <Label Text="Already have an account ?" />
-            <Label Text="Login" TextColor="#a90409" FontAttributes="Bold">
+            <Label Text="Login" TextColor="#77A7FF" FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapLogin" Tapped="TapLogin_Tapped"/>
                 </Label.GestureRecognizers>
