@@ -23,6 +23,7 @@ namespace WeatherApp
             var homePage = new HomePage(_apiService);
             var favorites = new FavoritesPage(_apiService);
             var questions = new QuestionsPage();
+            var about = new AboutPage();
             var profile = new ProfilePage(_apiService, _validator);
 
 
@@ -33,6 +34,7 @@ namespace WeatherApp
                     new ShellContent { Title = "Home", Icon ="home", Content = homePage },
                     new ShellContent { Title = "Favourites", Icon ="heart", Content = favorites },
                     new ShellContent { Title = "Questions", Icon ="perguntas", Content = questions },
+                    new ShellContent { Title = "About", Icon = "icon_13d", Content = about },
                     new ShellContent {Title = "Profile", Icon="profile", Content = profile },
                 }
 

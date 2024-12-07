@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Pages.AboutPage"
+             Title="About">
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
+
+        <VerticalStackLayout Grid.Row="0"
+                     BackgroundColor="#77A7FF"
+                     VerticalOptions="Start"
+                     Spacing="10"
+                     Padding="20">
+
+            <ImageButton Source="app_logo.png"
+                 HeightRequest="150"
+                 WidthRequest="150"
+                 CornerRadius="75"
+                 Aspect="AspectFit"
+                 IsEnabled="false"/>
+
+            <Label Text="WeatherApp"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                     Margin="20"
+                     Spacing="20">
+
+            <Label Text="Developer: Rafael Ferreira"
+                   FontSize="16"
+                   TextColor="Black" />
+
+            <Label Text="Version: 1.1.0"
+                   FontSize="16"
+                   TextColor="Black" />
+
+            <Label Text="WeatherApp is a modern weather tracking application designed to provide accurate and real-time weather updates for your location and around the world."
+                   FontSize="14"
+                   TextColor="Gray"
+                   LineBreakMode="WordWrap" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
