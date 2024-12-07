@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Pages.FavoritesPage"
+             Title="Favourites">
+    
+    <VerticalStackLayout>
+        <Label x:Name="LblWarning" 
+           Text="None city selected as favorite"
+           FontSize="15"
+           FontAttributes="Bold"
+           TextColor="Red"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           IsVisible="False"/>
+
+        <CollectionView x:Name="CvCities"
+            SelectionMode="Single"
+            Margin="5"
+            SelectionChanged="CvCities_SelectionChanged">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                 Span="2"
+                 HorizontalItemSpacing="10"
+                 VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border VerticalOptions="Start"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                Padding="10">
+                        <Grid RowSpacing="5"
+                              ColumnDefinitions="Auto,*,Auto"
+                              RowDefinitions="Auto,Auto">
+                            <Image Grid.Row="0" Grid.Column="0"
+                                   Source="{Binding WeatherIcon}"
+                                   HeightRequest="50"
+                                   WidthRequest="50"
+                                   VerticalOptions="Center" />      
+
+                            <!-- Nome da cidade -->
+                            <Label Grid.Row="0" 
+                                   Grid.Column="1"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Name}" />
+
+                            <!-- Temperatura -->
+                            <Label Grid.Row="1" 
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   TextColor="Blue"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start"
+                                   Text="{Binding Temperature}" />
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -20,7 +20,8 @@ namespace WeatherApp
 
         private void ConfigureShell()
         {
-            var homePage = new WeatherDetailsPage(_apiService);
+            var homePage = new HomePage(_apiService);
+            var favorites = new FavoritesPage(_apiService);
             var questions = new QuestionsPage();
             var profile = new ProfilePage(_apiService, _validator);
 
@@ -30,6 +31,7 @@ namespace WeatherApp
                 Items =
                 {
                     new ShellContent { Title = "Home", Icon ="home", Content = homePage },
+                    new ShellContent { Title = "Favourites", Icon ="heart", Content = favorites },
                     new ShellContent { Title = "Questions", Icon ="perguntas", Content = questions },
                     new ShellContent {Title = "Profile", Icon="profile", Content = profile },
                 }

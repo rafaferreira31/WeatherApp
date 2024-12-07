@@ -232,5 +232,24 @@ namespace WeatherApp.Services
 
             return JsonConvert.DeserializeObject<Root>(response);
         }
+
+        public async Task<int?> GetCityIdByName(string city)
+        {
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetStringAsync($"https://api.openweathermap.org/data/2.5/forecast?q={city}&units=metric&appid=2cab3f65efa3c3fae8fe1d0d841a95f1");
+
+                var weatherData = JsonConvert.DeserializeObject<Root>(response);
+
+                return weatherData?.city?.id;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error getting the city Id of {city}: {ex.Message}");
+                return null;
+            }
+        }
+
     }
 }

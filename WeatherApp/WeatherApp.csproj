@@ -58,6 +58,8 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\accounts.png" />
 	  <None Remove="Resources\Images\cold.png" />
+	  <None Remove="Resources\Images\heart.png" />
+	  <None Remove="Resources\Images\heartfill.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\humidity.png" />
 	  <None Remove="Resources\Images\icon_01d.png" />
@@ -95,11 +97,27 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 		<PackageReference Include="UtcTimeLibrary" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\HomePage.xaml">
+	  <Compile Update="Pages\CityWeatherDetailsPage.xaml.cs">
+	    <DependentUpon>CityWeatherDetailsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\FavoritesPage.xaml.cs">
+	    <DependentUpon>FavoritesPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\CityWeatherDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\FavoritesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LoginPage.xaml">
@@ -117,7 +135,7 @@
 	  <MauiXaml Update="Pages\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\WeatherDetailsPage.xaml">
+	  <MauiXaml Update="Pages\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
